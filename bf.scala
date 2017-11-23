@@ -8,10 +8,10 @@ type Mem = Map[Int, Int]
 // (2a) Complete the functions for safely reading  
 // and writing brainf*** memory. Safely read should
 // Return the value stored in the Map for a given memory
-// pointer, if it exists; otherwise return 0. The
+// pointer, if it exists; otherwise it Returns 0. The
 // writing function generates a new Map with the
 // same data, except at the given memory pointer the
-// a value v is stored.
+// value v is stored.
 
 
 //def sread(mem: Mem, mp: Int) : Int = ...
@@ -21,10 +21,11 @@ type Mem = Map[Int, Int]
 
 // (2b) Implement the two jumping instructions in the 
 // brainf*** language. In jumpRight, given a program and 
-// a program counter move the program counter to the right 
-// until after the *matching* ]-command. Similarly, 
+// a program counter move the counter to the right 
+// until the command after the *matching* ]-command. Similarly, 
 // jumpLeft implements the move to the left to just after
-// the *matching* [--command.
+// the *matching* [-command. The levels are used to find the
+// *matching* bracket.
 
 //def jumpRight(prog: String, pc: Int, level: Int) : Int = ...
 
@@ -40,15 +41,16 @@ type Mem = Map[Int, Int]
 // pc is pointing to something outside the program string.
 // If the pc points to a character inside the program, the pc, 
 // memory pointer and memory need to be updated according to 
-// rules of the brainf*** language. Then, recursively, run 
+// rules of the brainf*** language. Then, recursively, the run 
 // function continues with the command at the new program
 // counter. 
+//
 // Implement the start function that calls run with the program
 // counter and memory counter set to 0.
 
 //def run(prog: String, pc: Int, mp: Int, mem: Mem) : Mem = ...
 
-//def start(prog: String, m: Mem) = ...
+//def start(prog: String, mem: Mem) = ...
 
 
 
