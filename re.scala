@@ -49,8 +49,8 @@ def nullable (r: Rexp) : Boolean = r match {
     case ZERO => false
     case ONE => true
     case CHAR => false
-    case ALT(r1,r2) => nullable(r1) | nullable(r2)
-    case SEQ(r1,r2) => nullable(r1) & nullable(r2)
+    case ALT(r1,r2) => nullable(r1) || nullable(r2)
+    case SEQ(r1,r2) => nullable(r1) && nullable(r2)
     case STAR(r) => true
 }
 
