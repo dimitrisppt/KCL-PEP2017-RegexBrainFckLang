@@ -60,9 +60,9 @@ def nullable (r: Rexp) : Boolean = r match {
 // function calculates the derivative of a
 // regular expression w.r.t. a character.
 
-def der (c: Char, r: Rexp) : Rexp = r match {
-
-}
+// def der (c: Char, r: Rexp) : Rexp = r match {
+//
+// }
 
 
 
