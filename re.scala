@@ -60,7 +60,7 @@ def nullable (r: Rexp) : Boolean = r match {
 // function calculates the derivative of a
 // regular expression w.r.t. a character.
 
-def der (c: Char, r: Rexp) : Rexp = r match {
+def der (c: Char, r: Rexp): Rexp = r match {
     case ZERO => ZERO
     case ONE => ZERO
     case CHAR(d) => if (c==d) {
@@ -86,7 +86,7 @@ def der (c: Char, r: Rexp) : Rexp = r match {
 // expressions; however it does not simplify inside
 // STAR-regular expressions.
 
-def simp(r: Rexp) : Rexp = {
+def simp(r: Rexp): Rexp = r match {
     case SEQ(r1, r2) => if (simp(r1) == ZERO){
                             ZERO
                         }
@@ -124,12 +124,14 @@ def simp(r: Rexp) : Rexp = {
 // expression and a string and checks whether the
 // string matches the regular expression
 
-// def ders (s: List[Char], r: Rexp) : Rexp =  {
-//
+// def ders (s: List[Char], r: Rexp) : Rexp = s match {
+//     case Nil => r
+//     case c::cs => ders(cs, simp(der(c,r)))
 // }
 //
 // def matcher(r: Rexp, s: String): Boolean = {
-//
+//     val str = s.toList
+//     nullable(ders(str,r))
 // }
 
 
@@ -137,7 +139,8 @@ def simp(r: Rexp) : Rexp = {
 // expressions according to the specification
 // given in the coursework.
 
-//def size(r: Rexp): Int = ...
+// def size(r: Rexp): Int = {
+// }
 
 
 // some testing data
