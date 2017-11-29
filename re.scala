@@ -139,9 +139,14 @@ def matcher(r: Rexp, s: String): Boolean = {
 // expressions according to the specification
 // given in the coursework.
 
-// def size(r: Rexp): Int = r match {
-//
-// }
+def size(r: Rexp): Int = r match {
+    case ZERO => 1
+    case ONE => 1
+    case CHAR(c) => 1
+    case ALT(r1,r2) => size(r1) + size(r2) + 1
+    case SEQ(r1,r2) => size(r1) + size(r2) + 1
+    case STAR(r) => size(r) + 1
+}
 
 
 // some testing data
