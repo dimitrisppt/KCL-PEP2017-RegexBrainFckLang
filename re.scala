@@ -124,22 +124,23 @@ def simp(r: Rexp): Rexp = r match {
 // expression and a string and checks whether the
 // string matches the regular expression
 
-// def ders (s: List[Char], r: Rexp) : Rexp = s match {
-//     case Nil => r
-//     case c::cs => ders(cs, simp(der(c,r)))
-// }
-//
-// def matcher(r: Rexp, s: String): Boolean = {
-//     val str = s.toList
-//     nullable(ders(str,r))
-// }
+def ders (s: List[Char], r: Rexp) : Rexp = s match {
+    case Nil => r
+    case c::cs => ders(cs, simp(der(c,r)))
+}
+
+def matcher(r: Rexp, s: String): Boolean = {
+    val str = s.toList
+    nullable(ders(str,r))
+}
 
 
 // (1e) Complete the size function for regular
 // expressions according to the specification
 // given in the coursework.
 
-// def size(r: Rexp): Int = {
+// def size(r: Rexp): Int = r match {
+//
 // }
 
 
