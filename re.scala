@@ -60,9 +60,22 @@ def nullable (r: Rexp) : Boolean = r match {
 // function calculates the derivative of a
 // regular expression w.r.t. a character.
 
-// def der (c: Char, r: Rexp) : Rexp = r match {
-//
-// }
+def der (c: Char, r: Rexp) : Rexp = r match {
+    case ZERO => ZERO
+    case ONE => ZERO
+    case CHAR(d) => if (c==d) {
+                        ONE
+                    } else {
+                        ZERO
+                    }
+    case ALT(r1,r2) => ALT(der(c,r1), der(c,r2))
+    case SEQ(r1,r2) => if (nullable(r1)) {
+                            ALT(SEQ(der(c,r1),r2), der(c,r2))
+                       } else {
+                            SEQ(der(c,r1),r2)
+                       }
+    case STAR(r) => SEQ(der(c,r), STAR(r))
+}
 
 
 
@@ -73,7 +86,36 @@ def nullable (r: Rexp) : Boolean = r match {
 // expressions; however it does not simplify inside
 // STAR-regular expressions.
 
-//def simp(r: Rexp) : Rexp = ...
+def simp(r: Rexp) : Rexp = {
+    case SEQ(r1, r2) => if (simp(r1) == ZERO){
+                            ZERO
+                        }
+        		        else if (simp(r2) == ZERO){
+                            ZERO
+                        }
+            		    else if (simp(r1) == ONE){
+                            simp(r2)
+                        }
+            		    else if (simp(r2) == ONE){
+                            simp(r1)
+                        }
+            	        else {
+                             SEQ(simp(r1), simp(r2))
+                        }
+    case ALT(r1, r2) => if (simp(r1) == ZERO){
+                             simp(r2)
+                        }
+						else if (simp(r2) == ZERO){
+                             simp(r1)
+                        }
+						else if (simp(r2) == simp(r1)){
+                             simp(r1)
+                        }
+						else {
+                             ALT(simp(r1), simp(r2))
+                        }
+    case _ => r
+}
 
 
 // (1d) Complete the two functions below; the first
@@ -82,9 +124,13 @@ def nullable (r: Rexp) : Boolean = r match {
 // expression and a string and checks whether the
 // string matches the regular expression
 
-//def ders (s: List[Char], r: Rexp) : Rexp = ...
-
-//def matcher(r: Rexp, s: String): Boolean = ...
+// def ders (s: List[Char], r: Rexp) : Rexp =  {
+//
+// }
+//
+// def matcher(r: Rexp, s: String): Boolean = {
+//
+// }
 
 
 // (1e) Complete the size function for regular
