@@ -36,9 +36,6 @@ def write(mem: Mem, mp: Int, v: Int) : Mem = {
 // jumpLeft implements the move to the left to just after
 // the *matching* [-command. The levels are used to find the
 // *matching* bracket.
-def check(prog: String, pc: Int): Try[Int] = {
-    Try(prog.charAt(pc))
-}
 
 def jumpRight(prog: String, pc: Int, level: Int) : Int = Try(prog.charAt(pc)).getOrElse(Nil) match {
     case ']' => if (level == 0) pc + 1
