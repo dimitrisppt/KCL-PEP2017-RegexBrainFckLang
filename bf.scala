@@ -3,6 +3,7 @@
 
 object CW8b {
 
+import scala.util.{Try, Success, Failure}
 type Mem = Map[Int, Int]
 
 // (2a) Complete the functions for safely reading
