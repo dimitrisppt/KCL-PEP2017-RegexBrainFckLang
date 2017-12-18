@@ -5,7 +5,7 @@ object CW8b {
 
 type Mem = Map[Int, Int]
 
-// (2a) Complete the functions for safely reading  
+// (2a) Complete the functions for safely reading
 // and writing brainf*** memory. Safely read should
 // Return the value stored in the Map for a given memory
 // pointer, if it exists; otherwise it Returns 0. The
@@ -14,15 +14,25 @@ type Mem = Map[Int, Int]
 // value v is stored.
 
 
-//def sread(mem: Mem, mp: Int) : Int = ...
+def sread(mem: Mem, mp: Int) : Int = {
+    val memory_pointer = mem.getOrElse(mp, 0)
+    if (memory_pointer == 0) {
+        0
+    } else {
+        memory_pointer
+    }
+}
 
-//def write(mem: Mem, mp: Int, v: Int) : Mem = ...
+def write(mem: Mem, mp: Int, v: Int) : Mem = {
+    val map_of_data = mem + (mp -> v)
+    map_of_data
+}
 
 
-// (2b) Implement the two jumping instructions in the 
-// brainf*** language. In jumpRight, given a program and 
-// a program counter move the counter to the right 
-// until the command after the *matching* ]-command. Similarly, 
+// (2b) Implement the two jumping instructions in the
+// brainf*** language. In jumpRight, given a program and
+// a program counter move the counter to the right
+// until the command after the *matching* ]-command. Similarly,
 // jumpLeft implements the move to the left to just after
 // the *matching* [-command. The levels are used to find the
 // *matching* bracket.
@@ -39,11 +49,11 @@ type Mem = Map[Int, Int]
 // memory at the stage when the execution of the brainf*** program
 // finishes. The interpretation finishes once the program counter
 // pc is pointing to something outside the program string.
-// If the pc points to a character inside the program, the pc, 
-// memory pointer and memory need to be updated according to 
-// rules of the brainf*** language. Then, recursively, the run 
+// If the pc points to a character inside the program, the pc,
+// memory pointer and memory need to be updated according to
+// rules of the brainf*** language. Then, recursively, the run
 // function continues with the command at the new program
-// counter. 
+// counter.
 //
 // Implement the start function that calls run with the program
 // counter and memory counter set to 0.
@@ -65,7 +75,7 @@ type Mem = Map[Int, Int]
 // first some contrived (small) programs
 
 // clears the 0-cell
-start("[-]", Map(0 -> 100)) 
+start("[-]", Map(0 -> 100))
 
 // copies content of the 0-cell to 1-cell
 start("[->+<]", Map(0 -> 10))
@@ -146,6 +156,6 @@ start(""">>+>+<[[->>[>>]>>>[>>]+[<<]<<<[<<]>[>[>>]>>+>[>>]<+<[<<]<<<[<
       [<+>-[<+>-[<+>-[<[-]>>[-]+>+<<-]]]]]]]]]]<[>+<-]+>>]<<[<<]>>]""", Map())
 
 
-*/ 
+*/
 
 }
